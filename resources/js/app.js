@@ -7,6 +7,26 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+import { HasError, AlertError } from 'vform/src/components/bootstrap4'
+import Form from 'vform'
+
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+import VueRouter from 'vue-router';
+Vue.use(VueRouter)
+
+let routes = [
+    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
+    { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/profile', component: require('./components/Profile.vue').default }
+  ]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes 
+})
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,4 +49,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router
 });
